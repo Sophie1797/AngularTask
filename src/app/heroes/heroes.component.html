@@ -15,7 +15,195 @@
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a>
-    <button class="delete" title="delete hero"
-    (click)="delete(hero)">x</button>
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>
 </ul>
+<hr/>
+
+<!--modal active btn-->
+<button class="btn btn-default" data-toggle="modal" data-target="#Modalofadd">
+  add
+</button>
+
+<!-- 模态框（Modal）ADD -->
+<div class="modal fade" id="Modalofadd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          Add Heroes
+        </h4>
+      </div>
+      <!-- <div class="modal-body">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">ID</label>
+            <div class="col-sm-10">
+              <input #heroID type="text" class="form-control" id="firstname" placeholder="请输入ID">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="firstname" class="col-sm-2 control-label">名字</label>
+            <div class="col-sm-10">
+              <input #heroName type="text" class="form-control" id="firstname" placeholder="请输入名字">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">gender</label>
+            <div class="col-sm-10">
+              <input #heroGender type="text" class="form-control" id="lastname" placeholder="请输入gender">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">age</label>
+            <div class="col-sm-10">
+              <input #heroAge type="text" class="form-control" id="lastname" placeholder="请输入age">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lastname" class="col-sm-2 control-label">description</label>
+            <div class="col-sm-10">
+              <input #heroDescription type="text" class="form-control" id="lastname" placeholder="请输入description">
+            </div>
+          </div>
+        </form>
+      </div> -->
+      <div class="modal-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="firstname" class="col-sm-2 control-label">ID</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="heroToAdd.id" type="text" class="form-control" name="id" placeholder="请输入ID">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="firstname" class="col-sm-2 control-label">名字</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="heroToAdd.name" type="text" class="form-control" name="name" placeholder="请输入名字">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastname" class="col-sm-2 control-label">gender</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="heroToAdd.gender" type="text" class="form-control" name="gender" placeholder="请输入gender">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastname" class="col-sm-2 control-label">age</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="heroToAdd.age" type="text" class="form-control" name="age" placeholder="请输入age">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastname" class="col-sm-2 control-label">description</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="heroToAdd.description" type="text" class="form-control" name="desc" placeholder="请输入description">
+              </div>
+            </div>
+          </form>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+        <!-- (click) passes input value to add() and then clears the input-->
+        <button type="button" class="btn btn-primary" (click)="addHero();">
+          提交
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal -->
+</div>
+<!--modal end -->
+<!--herolist -->
+<table class="table table-hover">
+  <caption>My Heroes</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let hero of heroes">
+    <tr (click)="onSelect(hero)">
+      <td [innerHtml]="hero.id" ></td>
+      <td><a [innerHtml]="hero.name" routerLink="/detail/{{hero.id}}"></a></td>
+      <td [innerHtml]="hero.gender"></td>
+      <td [innerHtml]="hero.age"></td>
+      <td>
+        <a (click)="delete(hero)">delete</a>
+      </td>
+      <td>
+        <a data-toggle="modal" data-target="#Modalofupdate" (click)="OnClickUpdateHero(hero)">update</a>
+      </td>
+    </tr>
+    <tr *ngIf="hero.onselected">
+      <td colspan="4" [innerHtml]="hero.description"></td>
+    </tr>
+  </tbody>
+  <!-- 模态框（Modal） UPDATE-->
+  <div class="modal fade" id="Modalofupdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+              Heroes Update
+            </h4>
+          </div>
+          <div class="modal-body">
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label for="firstname" class="col-sm-2 control-label">ID</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="heroToUpdate.id" type="text" class="form-control" name="id" placeholder="请输入ID">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="firstname" class="col-sm-2 control-label">名字</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="heroToUpdate.name" type="text" class="form-control" name="name" placeholder="请输入名字">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastname" class="col-sm-2 control-label">gender</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="heroToUpdate.gender" type="text" class="form-control" name="gender" placeholder="请输入gender">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastname" class="col-sm-2 control-label">age</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="heroToUpdate.age" type="text" class="form-control" name="age" placeholder="请输入age">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastname" class="col-sm-2 control-label">description</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="heroToUpdate.description" type="text" class="form-control" name="desc" placeholder="请输入description">
+                  </div>
+                </div>
+              </form>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+            </button><!-- (click) passes input value to add() and then clears the input-->
+             <button type="button" class="btn btn-primary" (click)="updateHero()" >
+              提交
+            </button>
+          </div>
+        </div><!-- /.modal-content -->
+     </div><!-- /.modal -->
+  </div>
+  <!--modal end -->
+</table>

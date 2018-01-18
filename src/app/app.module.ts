@@ -16,6 +16,7 @@ import { HeroSearchComponent }  from './hero-search/hero-search.component';
 import { HeroService }          from './hero.service';
 import { MessageService }       from './message.service';
 import { MessagesComponent }    from './messages/messages.component';
+import { HeroBirthdayComponent } from './hero-birthday/hero-birthday.component';
 
 // import { AppBootstrapModule } from './app-bootstrap/app-bootstrap.module';
 @NgModule({
@@ -39,7 +40,8 @@ import { MessagesComponent }    from './messages/messages.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    HeroBirthdayComponent
   ],
   providers: [ HeroService, MessageService ],
   bootstrap: [ AppComponent ]

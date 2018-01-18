@@ -27,19 +27,21 @@
     "@angular/platform-server": "~5.0.0",
     "@angular/router": "~5.0.0",
     "@angular/upgrade": "~5.0.0",
+    "@types/bootstrap": "^3.3.36",
     "angular-in-memory-web-api": "~0.5.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "jquery": "^3.2.1",
     "rxjs": "^5.5.0",
     "web-animations-js": "^2.3.1",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "loglevel":"^1.6.1"
   },
   "devDependencies": {
     "@angular/cli": "1.5.0",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "^2.0.3",
-    "@types/jquery": "^3.2.16",
+    "@types/jquery": "^3.2.18",
     "@types/node": "^6.0.45",
     "jasmine": "~2.4.1",
     "jasmine-core": "~2.4.1",

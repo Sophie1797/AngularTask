@@ -6,6 +6,21 @@
       <input [(ngModel)]="hero.name" placeholder="name"/>
     </label>
   </div>
+  <div>
+      <label>gender:
+        <input [(ngModel)]="hero.gender" placeholder="gender"/>
+      </label>
+  </div>
+  <div>
+      <label>age:
+        <input [(ngModel)]="hero.age" placeholder="age"/>
+      </label>
+  </div>
+  <div>
+      <label>description:
+        <input [(ngModel)]="hero.description" placeholder="description"/>
+      </label>
+  </div>
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
 </div>
